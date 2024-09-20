@@ -1,0 +1,69 @@
+
+services:
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    image: nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - volume_wordpress:/var/www/wordpress
+    restart: unless-stopped
+    networks:
+      - networks
+    depends_on:
+      - wordpress
+
+  mariadb:
+    build:
+      context: mariadb
+      dockerfile: Dockerfile
+    image: mariadb
+    container_name: mariadb
+    ports:
+      - "3306"
+    volumes:
+      - volume_mysql:/var/lib/mysql/
+    networks:
+      - networks
+    env_file:
+      - .env
+    restart: always
+
+  wordpress:
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
+    image: wordpress
+    container_name: wordpress
+    ports:
+      - "9000"
+    volumes:
+      - volume_wordpress:/var/www/wordpress
+    restart: on-failure
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    networks:
+      - networks
+
+networks:
+  networks:
+    driver: bridge
+
+volumes:
+  volume_mysql:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/nelallao/data/mysql
+      o: bind
+  volume_wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/nelallao/data/wordpress
+      o: bind
