@@ -33,3 +33,8 @@ clean: down
 	docker volume prune -f
 	sudo rm -rf /home/nelallao/data/wordpress
 	sudo rm -rf /home/nelallao/data/mysql
+
+fclean: clean
+	docker rmi -f $(shell docker images -q)
+	docker system prune -f
+	
