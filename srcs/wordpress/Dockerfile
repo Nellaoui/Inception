@@ -23,5 +23,3 @@ COPY ./conf/config.sh /config.sh
 COPY ./conf/wp-config.php /
 
 CMD ["bash", "/config.sh"]
-
-# CMD tail -f > /dev/null

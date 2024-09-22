@@ -8,4 +8,4 @@ mysql -e "GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO '${SQL_USER}'@'%';"
 # mysql -e "ALTER USER 'root'@'%' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
 mysql -e "FLUSH PRIVILEGES;"
 kill $(cat /var/run/mysqld/mysqld.pid)
-mysqld
+mysqld 

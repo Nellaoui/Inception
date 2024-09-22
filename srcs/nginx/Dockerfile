@@ -20,8 +20,6 @@ RUN mkdir -p /etc/nginx/
 
 COPY ./conf/conf.d/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-COPY ./index.html /var/www/html
-
 EXPOSE 443:443
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

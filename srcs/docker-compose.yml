@@ -22,8 +22,6 @@ services:
       dockerfile: Dockerfile
     image: mariadb
     container_name: mariadb
-    ports:
-      - "3306"
     volumes:
       - volume_mysql:/var/lib/mysql/
     networks:
@@ -38,8 +36,6 @@ services:
       dockerfile: Dockerfile
     image: wordpress
     container_name: wordpress
-    ports:
-      - "9000"
     volumes:
       - volume_wordpress:/var/www/wordpress
     restart: on-failure
